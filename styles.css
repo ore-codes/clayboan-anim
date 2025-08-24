@@ -4,6 +4,8 @@ body {
   font-family: 'AeonikPro', sans-serif;
   font-weight: 500;
   overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
 }
 
 h1 {
@@ -21,7 +23,7 @@ a[href] {
 }
 
 .loader {
-  height: 100vh;
+  height: 100dvh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -49,7 +51,7 @@ a[href] {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   perspective: 1500px;
   overflow: hidden;
   z-index: 10;
@@ -59,6 +61,13 @@ a[href] {
   position: relative;
   width: 100%;
   z-index: 1;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
+}
+
+.scroll-container::-webkit-scrollbar {
+  display: none;
 }
 
 .background-container {
@@ -66,7 +75,7 @@ a[href] {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   z-index: -10;
   background-color: #000;
 }
@@ -76,7 +85,7 @@ a[href] {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -139,12 +148,12 @@ a[href] {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: calc(100% - 40px);
+  width: calc(100% - 80px);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 12px;
-  padding: 20px;
+  font-size: 1.5rem;
+  padding: 40px;
   color: #fff;
   text-transform: uppercase;
   z-index: 30;
@@ -153,7 +162,6 @@ a[href] {
 .slide-number {
   display: inline-block;
   margin-right: 8px;
-  font-weight: 600;
 }
 
 .slide-total {

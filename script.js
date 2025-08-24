@@ -6,107 +6,26 @@ import Lenis from "lenis";
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const slides = [
-  {
-    title: "Alpha",
-    image: "https://picsum.photos/2400/1200?random=1",
-  },
-  {
-    title: "Beta",
-    image: "https://picsum.photos/2400/1200?random=2",
-  },
-  {
-    title: "Gamma",
-    image: "https://picsum.photos/2400/1200?random=3",
-  },
-  {
-    title: "Delta",
-    image: "https://picsum.photos/2400/1200?random=4",
-  },
-  {
-    title: "Epsilon",
-    image: "https://picsum.photos/2400/1200?random=5",
-  },
-  {
-    title: "Zeta",
-    image: "https://picsum.photos/2400/1200?random=6",
-  },
-  {
-    title: "Eta",
-    image: "https://picsum.photos/2400/1200?random=7",
-  },
-  {
-    title: "Theta",
-    image: "https://picsum.photos/2400/1200?random=8",
-  },
-  {
-    title: "Iota",
-    image: "https://picsum.photos/2400/1200?random=9",
-  },
-  {
-    title: "Kappa",
-    image: "https://picsum.photos/2400/1200?random=10",
-  },
-  {
-    title: "Lambda",
-    image: "https://picsum.photos/2400/1200?random=11",
-  },
-  {
-    title: "Mu",
-    image: "https://picsum.photos/2400/1200?random=12",
-  },
-  {
-    title: "Nu",
-    image: "https://picsum.photos/2400/1200?random=13",
-  },
-  {
-    title: "Xi",
-    image: "https://picsum.photos/2400/1200?random=14",
-  },
-  {
-    title: "Omicron",
-    image: "https://picsum.photos/2400/1200?random=15",
-  },
-  {
-    title: "Pi",
-    image: "https://picsum.photos/2400/1200?random=16",
-  },
-  {
-    title: "Rho",
-    image: "https://picsum.photos/2400/1200?random=17",
-  },
-  {
-    title: "Sigma",
-    image: "https://picsum.photos/2400/1200?random=18",
-  },
-  {
-    title: "Tau",
-    image: "https://picsum.photos/2400/1200?random=19",
-  },
-  {
-    title: "Upsilon",
-    image: "https://picsum.photos/2400/1200?random=20",
-  },
-  {
-    title: "Phi",
-    image: "https://picsum.photos/2400/1200?random=21",
-  },
-  {
-    title: "Chi",
-    image: "https://picsum.photos/2400/1200?random=22",
-  },
-  {
-    title: "Psi",
-    image: "https://picsum.photos/2400/1200?random=23",
-  },
-  {
-    title: "Omega",
-    image: "https://picsum.photos/2400/1200?random=24",
-  },
+  { title: "Akaza", image: "/clayboan-anim/akaza-vs-tanjiro.jpg" },
+  { title: "Castorice", image: "/clayboan-anim/castorice-honkai.jpg" },
+  { title: "Dandadan", image: "/clayboan-anim/dandadan-vertical.jpg" },
+  { title: "Demon Slayer", image: "/clayboan-anim/demon-slayer.jpg" },
+  { title: "Digimon", image: "/clayboan-anim/digimon-beatbreak.jpg" },
+  { title: "Gundam Robot", image: "/clayboan-anim/gundam-robot-sunset.jpg" },
+  { title: "Hatsune Miku", image: "/clayboan-anim/hatsune-miku.jpg" },
+  { title: "Kurama", image: "/clayboan-anim/naruto-kurama.jpg" },
+  { title: "Naruto", image: "/clayboan-anim/naruto-uzumaki.jpg" },
+  { title: "Revy", image: "/clayboan-anim/revy-black-lagoon.jpg" },
+  { title: "Skirk", image: "/clayboan-anim/skirk-genshin.jpg" },
+  { title: "Sung Jin-woo", image: "/clayboan-anim/sung-jinwoo-dark.jpg" },
+  { title: "Trunks", image: "/clayboan-anim/trunks-sword-dragon.jpg" },
+  { title: "Zenitsu", image: "/clayboan-anim/zenitsu-agatsuma.jpg" },
+  { title: "Zoro", image: "/clayboan-anim/roronoa-zoro.jpg" },
 ];
 
 const assets = [
-  { type: "font", name: "AeonikPro", url: "fonts/AeonikPro.otf" },
-  { type: "font", name: "OldLondon", url: "fonts/OldLondon.ttf" },
+  { type: "font", name: "AeonikPro", url: "/clayboan-anim/AeonikPro.otf" },
+  { type: "font", name: "OldLondon", url: "/clayboan-anim/OldLondon.ttf" },
   ...slides.map(s => s.image),
 ];
 
@@ -219,14 +138,28 @@ function initializeSlides() {
   const lenis = new Lenis({
     lerp: 0.05,
     smoothWheel: true,
+    smoothTouch: true,
+    infinite: false,
+    orientation: 'vertical',
+    gestureOrientation: 'vertical',
+    touchMultiplier: 0.5,
     wheelMultiplier: 0.3,
-    touchMultiplier: 0.3,
   });
   lenis.on("scroll", ScrollTrigger.update);
   gsap.ticker.add((time) => {
     lenis.raf(time * 1000);
   });
   gsap.ticker.lagSmoothing(0);
+
+  gsap.set(titlesContainer, {
+    top: 0,
+  });
+
+  requestAnimationFrame(() => {
+    gsap.set(titlesContainer, {
+      top: 0,
+    });
+  });
 
   slides.forEach((slide, index) => {
     const backgroundElement = document.createElement('div');
@@ -249,15 +182,10 @@ function initializeSlides() {
     if (index === 0) {
       gsap.set(backgroundElement, {
         clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-        translateY: "0%",
       });
     } else {
       gsap.set(backgroundElement, {
-        clipPath: "polygon(33% 82%, 62% 100%, 48% 100%, 16% 100%)",
-        translateY: "16%",
-      });
-      gsap.set(titlesContainer, {
-        top: 0,
+        clipPath: "polygon(37% 100%, 76% 100%, 57% 100%, 20% 100%)",
       });
     }
   });
@@ -275,12 +203,13 @@ function initializeSlides() {
       animation: gsap.fromTo(
         currentBg,
         {
-          clipPath: "polygon(33% 82%, 62% 100%, 48% 100%, 16% 100%)",
+          clipPath: "polygon(37% 100%, 76% 100%, 57% 100%, 20% 100%)",
           translateY: "100%"
         },
         {
           clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
           translateY: "0%",
+          ease: (t) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t,
         }
       )
     });
@@ -297,6 +226,7 @@ function initializeSlides() {
         },
         {
           top: index * -128,
+          ease: (t) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t
         }
       ),
       onUpdate: (self) => {
@@ -315,6 +245,20 @@ function initializeSlides() {
   });
 
   slideNumber.textContent = '01';
+
+  setTimeout(() => {
+    gsap.set(titlesContainer, {
+      top: 0,
+    });
+  }, 100);
+
+  ScrollTrigger.addEventListener("refresh", () => {
+    if (window.scrollY === 0) {
+      gsap.set(titlesContainer, {
+        top: 0,
+      });
+    }
+  });
 
   let snapTimeout;
   let lastScrollTime = 0;

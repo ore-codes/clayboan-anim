@@ -1,3 +1,12 @@
+import { build } from "esbuild";
+
 export default {
-  base: 'https://ore.codes/animations-and-effects/clay-boan-featured-works/dist/',
+  base: '/clayboan-anim/',
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    rollupOptions: {
+      input: 'index.html',
+    },
+  },
 }
